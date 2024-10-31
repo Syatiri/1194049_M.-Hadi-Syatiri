@@ -7,30 +7,50 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f9fafb;
+            background-color: #f4f6f8;
             margin: 0;
             padding: 20px;
-            color: #2d3748;
+            color: #333;
         }
-        h1, h2 {
+        h1 {
             color: #1a202c;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         .container {
-            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
             background-color: #ffffff;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
-        table {
+        .tables {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .hash-info, .file-comparison {
+            flex: 1;
+            margin: 10px;
+        }
+        .hash-info table {
+            width: 100%;
+            background-color: #f7fafc;
+            border-collapse: collapse;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .file-comparison table {
             width: 100%;
             margin-top: 20px;
+            background-color: #ffffff;
             border-collapse: separate;
             border-spacing: 0;
-            background-color: #ffffff;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -58,12 +78,11 @@
             background-color: #ebf8ff;
         }
         form {
-            margin-top: 20px;
+            width: 80%;
+            margin-top: 40px;
             padding: 20px;
             background-color: #edf2f7;
             border-radius: 10px;
-            max-width: 500px;
-            margin: 20px auto;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         label {
@@ -108,41 +127,46 @@
     <div class="container">
         <h1>PERBANDINGAN HASH FILE</h1>
         
-        <h2>Informasi Hash</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Deskripsi</th>
-                    <th>Hash</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Hash Asli</td>
-                    <td id="original-hash">Loading...</td>
-                </tr>
-                <tr>
-                    <td>Hash Dimodifikasi</td>
-                    <td id="modified-hash">Loading...</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="tables">
+            <div class="hash-info">
+                <h2>Informasi Hash</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Hash</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hash Asli</td>
+                            <td id="original-hash">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td>Hash Dimodifikasi</td>
+                            <td id="modified-hash">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file-comparison">
+                <h2>Perbandingan Isi File</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nomor Baris</th>
+                            <th>Isi Asli</th>
+                            <th>Isi Dimodifikasi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="file-content">
+                        <!-- Konten file akan dipopulasi di sini -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        <h2>Perbandingan Isi File</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nomor Baris</th>
-                    <th>Isi Asli</th>
-                    <th>Isi Dimodifikasi</th>
-                </tr>
-            </thead>
-            <tbody id="file-content">
-                <!-- Konten file akan dipopulasi di sini -->
-            </tbody>
-        </table>
-
-        <h2>Update Data di File</h2>
         <form onsubmit="updateData(event);">
             <label for="line_number">Nomor Baris:</label>
             <input type="number" id="line_number" min="1" placeholder="Masukkan nomor baris" required>
